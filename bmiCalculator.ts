@@ -1,3 +1,24 @@
+interface ParsedValues {
+  height: number,
+  weight: number
+}
+
+const parseInputs = (args: Array<string>): ParsedValues => {
+  if (args.length !== 4) throw new Error('usage: ts-node bmiCalculator height weight')
+
+  const height: number = Number(args[2]);
+  const weight: number = Number(args[3]);
+
+  if (isNaN(height) || isNaN(weight)) {
+    throw new Error('height or weight should be number');
+  }
+
+  return {
+    height,
+    weight
+  }
+} 
+
 const calculateBMI = (height: number, weight: number): string => {
   if (height <= 0 || weight <= 0) {
     throw Error("height or weight have to be greater than 0")
@@ -25,4 +46,9 @@ const calculateBMI = (height: number, weight: number): string => {
   }
 }
 
-console.log(calculateBMI(180, 74));
+try {
+  const { height, weight } = parseInputs(process.argv);
+  console.log(calculateBMI(height, weight));
+} catch (e) {
+  console.log(`Error: ${e.message}`);
+}

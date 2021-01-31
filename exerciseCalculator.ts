@@ -1,11 +1,11 @@
-type Result = {
-  periodLength: number,
-  trainingDays: number,
-  originalTarget: number,
-  calculatedAvg: number,
-  success: boolean,
-  rating: number,
-  ratingDescription: string
+interface Result {
+  periodLength: number;
+  trainingDays: number;
+  originalTarget: number;
+  calculatedAvg: number;
+  success: boolean;
+  rating: number;
+  ratingDescription: string;
 };
 
 const calculateExercises = (weekHours: Array<number>): Result => {
