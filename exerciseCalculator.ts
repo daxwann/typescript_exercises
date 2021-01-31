@@ -1,3 +1,5 @@
+export {};
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -7,6 +9,15 @@ interface Result {
   rating: number;
   ratingDescription: string;
 };
+
+const parseInputs = (args: Array<string>): Array<number> => {
+  const [arg1, arg2, ...restArgs] = args;
+  return restArgs.map(arg => {
+    const hours: number = Number(arg);
+    if (isNaN(hours)) throw new Error(`${arg} is not a number`);
+    return hours;
+  })
+}
 
 const calculateExercises = (weekHours: Array<number>): Result => {
   const periodLength: number = weekHours.length;
@@ -28,4 +39,9 @@ const calculateExercises = (weekHours: Array<number>): Result => {
   }
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1]));
+try {
+  const weeklyHours: Array<number> = parseInputs(process.argv);
+  console.log(calculateExercises(weeklyHours));
+} catch (e) {
+  console.log(`Error: ${e.message}`);
+}
