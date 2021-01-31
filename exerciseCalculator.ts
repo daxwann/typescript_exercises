@@ -11,7 +11,7 @@ interface Result {
 };
 
 const parseInputs = (args: Array<string>): Array<number> => {
-  const [arg1, arg2, ...restArgs] = args;
+  const [_arg1, _arg2, ...restArgs] = args;
   return restArgs.map(arg => {
     const hours: number = Number(arg);
     if (isNaN(hours)) throw new Error(`${arg} is not a number`);
