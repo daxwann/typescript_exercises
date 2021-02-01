@@ -4,10 +4,10 @@ interface ParsedValues {
 }
 
 const parseInputs = (args: Array<string>): ParsedValues => {
-  if (args.length !== 4) throw new Error('usage: ts-node bmiCalculator height weight')
+  if (args.length !== 4) throw new Error('usage: ts-node bmiCalculator height weight');
 
-  const height: number = Number(args[2]);
-  const weight: number = Number(args[3]);
+  const height = Number(args[2]);
+  const weight = Number(args[3]);
 
   if (isNaN(height) || isNaN(weight)) {
     throw new Error('height or weight should be number');
@@ -16,13 +16,13 @@ const parseInputs = (args: Array<string>): ParsedValues => {
   return {
     height,
     weight
-  }
-}
+  };
+};
 
 export const parseQueryParam = (heightParam: string, weightParam: string): ParsedValues => {
   if (!heightParam || !weightParam) throw new Error("height and weight required");
-  const height: number = Number(heightParam);
-  const weight: number = Number(weightParam);
+  const height = Number(heightParam);
+  const weight = Number(weightParam);
 
   if (isNaN(height) || isNaN(weight)) {
     throw new Error('height or weight should be number');
@@ -31,12 +31,12 @@ export const parseQueryParam = (heightParam: string, weightParam: string): Parse
   return {
     height,
     weight
-  }
-}
+  };
+};
 
 export const calculateBMI = (height: number, weight: number): string => {
   if (height <= 0 || weight <= 0) {
-    throw Error("height or weight have to be greater than 0")
+    throw Error("height or weight have to be greater than 0");
   }
 
   const heightInMeters: number = height / 100;
@@ -59,11 +59,12 @@ export const calculateBMI = (height: number, weight: number): string => {
   }  else {
     return "Obese Class III (Very severely obese)";
   }
-}
+};
 
 try {
   const { height, weight } = parseInputs(process.argv);
   console.log(calculateBMI(height, weight));
 } catch (e) {
-  console.log(`Error: ${e.message}`);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  console.log(`Error: ${e.message as string}`);
 }

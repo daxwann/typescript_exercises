@@ -14,7 +14,7 @@ app.get("/bmi", (req, res) => {
     );
 
     const bmi: string = calculateBMI(height, weight);
-    
+
     const response = {
       height,
       weight,
@@ -23,7 +23,8 @@ app.get("/bmi", (req, res) => {
 
     res.send(response);
   } catch (e) {
-    res.status(400).send(`Error: ${e.message}`);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    res.status(400).send(`Error: ${e.message as string}`);
   }
 });
 
