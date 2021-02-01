@@ -1,8 +1,30 @@
-import express from 'express';
+import express from "express";
 const app = express();
+import { parseQueryParam, calculateBMI } from "./bmiCalculator";
 
-app.get('/hello', (_req, res) => {
-  res.send('Hello World');
+app.get("/hello", (_req, res) => {
+  res.send("Hello World");
+});
+
+app.get("/bmi", (req, res) => {
+  try {
+    const { height, weight } = parseQueryParam(
+      req.query.height as string,
+      req.query.weight as string
+    );
+
+    const bmi: string = calculateBMI(height, weight);
+    
+    const response = {
+      height,
+      weight,
+      bmi,
+    };
+
+    res.send(response);
+  } catch (e) {
+    res.status(400).send(`Error: ${e.message}`);
+  }
 });
 
 const PORT = 3003;

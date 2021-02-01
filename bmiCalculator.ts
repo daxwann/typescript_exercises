@@ -17,9 +17,24 @@ const parseInputs = (args: Array<string>): ParsedValues => {
     height,
     weight
   }
-} 
+}
 
-const calculateBMI = (height: number, weight: number): string => {
+export const parseQueryParam = (heightParam: string, weightParam: string): ParsedValues => {
+  if (!heightParam || !weightParam) throw new Error("height and weight required");
+  const height: number = Number(heightParam);
+  const weight: number = Number(weightParam);
+
+  if (isNaN(height) || isNaN(weight)) {
+    throw new Error('height or weight should be number');
+  }
+
+  return {
+    height,
+    weight
+  }
+}
+
+export const calculateBMI = (height: number, weight: number): string => {
   if (height <= 0 || weight <= 0) {
     throw Error("height or weight have to be greater than 0")
   }
