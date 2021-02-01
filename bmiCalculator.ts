@@ -3,21 +3,21 @@ interface ParsedValues {
   weight: number
 }
 
-const parseInputs = (args: Array<string>): ParsedValues => {
-  if (args.length !== 4) throw new Error('usage: ts-node bmiCalculator height weight');
+// const parseInputs = (args: Array<string>): ParsedValues => {
+//   if (args.length !== 4) throw new Error('usage: ts-node bmiCalculator height weight');
 
-  const height = Number(args[2]);
-  const weight = Number(args[3]);
+//   const height = Number(args[2]);
+//   const weight = Number(args[3]);
 
-  if (isNaN(height) || isNaN(weight)) {
-    throw new Error('height or weight should be number');
-  }
+//   if (isNaN(height) || isNaN(weight)) {
+//     throw new Error('height or weight should be number');
+//   }
 
-  return {
-    height,
-    weight
-  };
-};
+//   return {
+//     height,
+//     weight
+//   };
+// };
 
 export const parseQueryParam = (heightParam: string, weightParam: string): ParsedValues => {
   if (!heightParam || !weightParam) throw new Error("height and weight required");
@@ -61,10 +61,10 @@ export const calculateBMI = (height: number, weight: number): string => {
   }
 };
 
-try {
-  const { height, weight } = parseInputs(process.argv);
-  console.log(calculateBMI(height, weight));
-} catch (e) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  console.log(`Error: ${e.message as string}`);
-}
+// try {
+//   const { height, weight } = parseInputs(process.argv);
+//   console.log(calculateBMI(height, weight));
+// } catch (e) {
+//   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+//   console.log(`Error: ${e.message as string}`);
+// }
